@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_PROVIDER_DETAILS" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="PROVIDER_DETAILS"/>
+<defaultSchema schemaName="BTP_CUSTOMAPPS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICE_PROVIDER_DETAILS" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICE_PROVIDER_DETAILS"/>
+  </DataSource>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICE_PROVIDER_MASTER" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICE_PROVIDER_MASTER"/>
+  </DataSource>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICES_MASTER" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICES_MASTER"/>
+  </DataSource>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICE_CATEGORY" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICE_CATEGORY"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Service_prov_details">
+    <viewAttributes>
+      <viewAttribute id="CREATEDBY"/>
+      <viewAttribute id="CREATIONDATETIME"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="REMARKS"/>
+      <viewAttribute id="SERVICEPROVIDER_ID"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="UPDATEDATETIME"/>
+      <viewAttribute id="UPDATEDBY"/>
+      <viewAttribute id="UUID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICE_PROVIDER_DETAILS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATIONDATETIME" source="CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REMARKS" source="REMARKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDATETIME" source="UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDBY" source="UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UUID" source="UUID"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Service_prov_Master">
+    <viewAttributes>
+      <viewAttribute id="SERVICEPROVIDER_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_NAME"/>
+      <viewAttribute id="SADARAVENDOR_ID"/>
+    
+      <viewAttribute id="SERVICEPROVIDER_CREATEDBY"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDBY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICE_PROVIDER_MASTER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_NAME" source="SERVICEPROVIDER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SADARAVENDOR_ID" source="SADARAVENDOR_ID"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATIONDATETIME" source="CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDATETIME" source="UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDBY" source="UPDATEDBY"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter" cardinality="CN_1">
+    <viewAttributes>
+      <viewAttribute id="SERVICEPROVIDER_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_NAME"/>
+      <viewAttribute id="SADARAVENDOR_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATEDBY"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDBY"/>
+      <viewAttribute id="UUID"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="REMARKS"/>
+      <viewAttribute id="DELETIONFLAG"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Service_prov_details">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UUID" source="UUID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REMARKS" source="REMARKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+    </input>
+    <input node="#Service_prov_Master">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_NAME" source="SERVICEPROVIDER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SADARAVENDOR_ID" source="SADARAVENDOR_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATEDBY" source="SERVICEPROVIDER_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATIONDATETIME" source="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDATETIME" source="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDBY" source="SERVICEPROVIDER_UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+    </input>
+    <joinAttribute name="SERVICEPROVIDER_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Services_master">
+    <viewAttributes>
+      <viewAttribute id="SERVICE_CREATEDBY"/>
+      <viewAttribute id="SERVICE_CREATIONDATETIME"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICE_DESCRIPTION"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="SERVICE_NAME"/>
+      <viewAttribute id="SERVICE_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICE_UPDATEDBY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICES_MASTER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATIONDATETIME" source="CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_DESCRIPTION" source="SERVICE_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_NAME" source="SERVICE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDATETIME" source="UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDBY" source="UPDATEDBY"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter" cardinality="CN_1">
+    <viewAttributes>
+      <viewAttribute id="SERVICEPROVIDER_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_NAME"/>
+      <viewAttribute id="SADARAVENDOR_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATEDBY"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDBY"/>
+      <viewAttribute id="UUID"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="REMARKS"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="SERVICE_CREATEDBY"/>
+      <viewAttribute id="SERVICE_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICE_DESCRIPTION"/>
+      <viewAttribute id="SERVICE_NAME"/>
+      <viewAttribute id="SERVICE_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICE_UPDATEDBY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_NAME" source="SERVICEPROVIDER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SADARAVENDOR_ID" source="SADARAVENDOR_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATEDBY" source="SERVICEPROVIDER_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATIONDATETIME" source="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDATETIME" source="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDBY" source="SERVICEPROVIDER_UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UUID" source="UUID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REMARKS" source="REMARKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+    </input>
+    <input node="#Services_master">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATEDBY" source="SERVICE_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATIONDATETIME" source="SERVICE_CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_DESCRIPTION" source="SERVICE_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_NAME" source="SERVICE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDATETIME" source="SERVICE_UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDBY" source="SERVICE_UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+    </input>
+    <joinAttribute name="SERVICE_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="service_category">
+    <viewAttributes>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICECATEGORY_NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICE_CATEGORY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_NAME" source="SERVICECATEGORY_NAME"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="rightOuter" cardinality="C1_N">
+    <viewAttributes>
+      <viewAttribute id="SERVICEPROVIDER_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_NAME"/>
+      <viewAttribute id="SADARAVENDOR_ID"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATEDBY"/>
+      <viewAttribute id="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICEPROVIDER_UPDATEDBY"/>
+      <viewAttribute id="UUID"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="REMARKS"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="SERVICE_CREATEDBY"/>
+      <viewAttribute id="SERVICE_CREATIONDATETIME"/>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICE_DESCRIPTION"/>
+      <viewAttribute id="SERVICE_NAME"/>
+      <viewAttribute id="SERVICE_UPDATEDATETIME"/>
+      <viewAttribute id="SERVICE_UPDATEDBY"/>
+      <viewAttribute id="SERVICECATEGORY_NAME"/>
+      <viewAttribute id="JOIN$SERVICECATEGORY_ID$SERVICECATEGORY_ID" hidden="true"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#service_category">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_NAME" source="SERVICECATEGORY_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SERVICECATEGORY_ID$SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+    </input>
+    <input node="#Join_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_ID" source="SERVICEPROVIDER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_NAME" source="SERVICEPROVIDER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SADARAVENDOR_ID" source="SADARAVENDOR_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATEDBY" source="SERVICEPROVIDER_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_CREATIONDATETIME" source="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDATETIME" source="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICEPROVIDER_UPDATEDBY" source="SERVICEPROVIDER_UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UUID" source="UUID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REMARKS" source="REMARKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATEDBY" source="SERVICE_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_CREATIONDATETIME" source="SERVICE_CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_DESCRIPTION" source="SERVICE_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_NAME" source="SERVICE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDATETIME" source="SERVICE_UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_UPDATEDBY" source="SERVICE_UPDATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SERVICECATEGORY_ID$SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+    </input>
+    <joinAttribute name="JOIN$SERVICECATEGORY_ID$SERVICECATEGORY_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_3">
+  <attributes>
+    <attribute id="SERVICEPROVIDER_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_ID"/>
+    </attribute>
+    <attribute id="SERVICEPROVIDER_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_NAME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_NAME"/>
+    </attribute>
+    <attribute id="SADARAVENDOR_ID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SADARAVENDOR_ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="SADARAVENDOR_ID"/>
+    </attribute>
+    <attribute id="SERVICEPROVIDER_CREATEDBY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_CREATEDBY"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_CREATEDBY"/>
+    </attribute>
+    <attribute id="SERVICEPROVIDER_CREATIONDATETIME" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_CREATIONDATETIME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_CREATIONDATETIME"/>
+    </attribute>
+    <attribute id="SERVICEPROVIDER_UPDATEDATETIME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_UPDATEDATETIME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_UPDATEDATETIME"/>
+    </attribute>
+    <attribute id="SERVICEPROVIDER_UPDATEDBY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICEPROVIDER_UPDATEDBY"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICEPROVIDER_UPDATEDBY"/>
+    </attribute>
+    <attribute id="UUID" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="UUID"/>
+      <keyMapping columnObjectName="Join_3" columnName="UUID"/>
+    </attribute>
+    <attribute id="SERVICE_ID" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_ID"/>
+    </attribute>
+    <attribute id="REMARKS" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REMARKS"/>
+      <keyMapping columnObjectName="Join_3" columnName="REMARKS"/>
+    </attribute>
+    <attribute id="DELETIONFLAG" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DELETIONFLAG"/>
+      <keyMapping columnObjectName="Join_3" columnName="DELETIONFLAG"/>
+    </attribute>
+    <attribute id="SERVICE_CREATEDBY" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_CREATEDBY"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_CREATEDBY"/>
+    </attribute>
+    <attribute id="SERVICE_CREATIONDATETIME" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_CREATIONDATETIME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_CREATIONDATETIME"/>
+    </attribute>
+    <attribute id="SERVICECATEGORY_ID" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICECATEGORY_ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICECATEGORY_ID"/>
+    </attribute>
+    <attribute id="SERVICE_DESCRIPTION" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_DESCRIPTION"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_DESCRIPTION"/>
+    </attribute>
+    <attribute id="SERVICE_NAME" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_NAME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_NAME"/>
+    </attribute>
+    <attribute id="SERVICE_UPDATEDATETIME" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_UPDATEDATETIME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_UPDATEDATETIME"/>
+    </attribute>
+    <attribute id="SERVICE_UPDATEDBY" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_UPDATEDBY"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICE_UPDATEDBY"/>
+    </attribute>
+    <attribute id="SERVICECATEGORY_NAME" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICECATEGORY_NAME"/>
+      <keyMapping columnObjectName="Join_3" columnName="SERVICECATEGORY_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Service_prov_details" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="12" y="255"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Service_prov_Master" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="295" y="259"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="189" y="210"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Services_master" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="38" y="249"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="175" y="174"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="service_category" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="502" y="250"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="502" y="195"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario> 

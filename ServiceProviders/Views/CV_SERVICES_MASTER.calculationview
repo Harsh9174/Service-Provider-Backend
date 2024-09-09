@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_SERVICES_MASTER" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_SERVICES_MASTER"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICES_MASTER" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICES_MASTER"/>
+  </DataSource>
+  <DataSource id="SDR.ServiceProviders.Tables::SERVICE_CATEGORY" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="BTP_CUSTOMAPPS" columnObjectName="SDR.ServiceProviders.Tables::SERVICE_CATEGORY"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Service_Matser">
+    <viewAttributes>
+      <viewAttribute id="CREATEDBY"/>
+      <viewAttribute id="CREATIONDATETIME"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICE_DESCRIPTION"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="SERVICE_NAME"/>
+      <viewAttribute id="UPDATEDATETIME"/>
+      <viewAttribute id="UPDATEDBY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICES_MASTER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATIONDATETIME" source="CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_DESCRIPTION" source="SERVICE_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_NAME" source="SERVICE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDATETIME" source="UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDBY" source="UPDATEDBY"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="service_category">
+    <viewAttributes>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICECATEGORY_NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#SDR.ServiceProviders.Tables::SERVICE_CATEGORY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_NAME" source="SERVICECATEGORY_NAME"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Services_Master" joinType="leftOuter" cardinality="CN_1">
+    <viewAttributes>
+      <viewAttribute id="CREATEDBY"/>
+      <viewAttribute id="CREATIONDATETIME"/>
+      <viewAttribute id="DELETIONFLAG"/>
+      <viewAttribute id="SERVICECATEGORY_ID"/>
+      <viewAttribute id="SERVICE_DESCRIPTION"/>
+      <viewAttribute id="SERVICE_ID"/>
+      <viewAttribute id="SERVICE_NAME"/>
+      <viewAttribute id="UPDATEDATETIME"/>
+      <viewAttribute id="UPDATEDBY"/>
+      <viewAttribute id="SERVICECATEGORY_NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Service_Matser">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREATIONDATETIME" source="CREATIONDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELETIONFLAG" source="DELETIONFLAG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_DESCRIPTION" source="SERVICE_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_ID" source="SERVICE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_NAME" source="SERVICE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDATETIME" source="UPDATEDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UPDATEDBY" source="UPDATEDBY"/>
+    </input>
+    <input node="#service_category">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_NAME" source="SERVICECATEGORY_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SERVICECATEGORY_ID" source="SERVICECATEGORY_ID"/>
+    </input>
+    <joinAttribute name="SERVICECATEGORY_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Services_Master">
+  <attributes>
+    <attribute id="CREATEDBY" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREATEDBY"/>
+      <keyMapping columnObjectName="Services_Master" columnName="CREATEDBY"/>
+    </attribute>
+    <attribute id="CREATIONDATETIME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREATIONDATETIME"/>
+      <keyMapping columnObjectName="Services_Master" columnName="CREATIONDATETIME"/>
+    </attribute>
+    <attribute id="DELETIONFLAG" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DELETIONFLAG"/>
+      <keyMapping columnObjectName="Services_Master" columnName="DELETIONFLAG"/>
+    </attribute>
+    <attribute id="SERVICECATEGORY_ID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICECATEGORY_ID"/>
+      <keyMapping columnObjectName="Services_Master" columnName="SERVICECATEGORY_ID"/>
+    </attribute>
+    <attribute id="SERVICE_DESCRIPTION" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_DESCRIPTION"/>
+      <keyMapping columnObjectName="Services_Master" columnName="SERVICE_DESCRIPTION"/>
+    </attribute>
+    <attribute id="SERVICE_ID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_ID"/>
+      <keyMapping columnObjectName="Services_Master" columnName="SERVICE_ID"/>
+    </attribute>
+    <attribute id="SERVICE_NAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICE_NAME"/>
+      <keyMapping columnObjectName="Services_Master" columnName="SERVICE_NAME"/>
+    </attribute>
+    <attribute id="UPDATEDATETIME" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="UPDATEDATETIME"/>
+      <keyMapping columnObjectName="Services_Master" columnName="UPDATEDATETIME"/>
+    </attribute>
+    <attribute id="UPDATEDBY" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="UPDATEDBY"/>
+      <keyMapping columnObjectName="Services_Master" columnName="UPDATEDBY"/>
+    </attribute>
+    <attribute id="SERVICECATEGORY_NAME" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SERVICECATEGORY_NAME"/>
+      <keyMapping columnObjectName="Services_Master" columnName="SERVICECATEGORY_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Service_Matser" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-112" y="292"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="service_category" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="216" y="292"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Services_Master" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="78" y="221"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

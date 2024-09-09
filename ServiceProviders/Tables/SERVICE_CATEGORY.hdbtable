@@ -1,0 +1,11 @@
+table.schemaName = "BTP_CUSTOMAPPS";
+table.tableType = COLUMNSTORE;
+table.columns =
+ [
+    {name = "SERVICECATEGORY_ID"; sqlType = NVARCHAR; length = 20;},
+    {name = "SERVICECATEGORY_NAME"; sqlType = NVARCHAR; length = 100;}
+ ];
+ 
+ table.primaryKey.pkcolumns = ["SERVICECATEGORY_ID"];
+ 
+ 

@@ -1,0 +1,15 @@
+table.schemaName = "BTP_CUSTOMAPPS";
+table.tableType = COLUMNSTORE;
+table.columns =
+ [
+    {name = "SERVICEPROVIDER_ID"; sqlType = INTEGER;},
+    {name = "SERVICEPROVIDER_NAME"; sqlType = NVARCHAR; length = 100;},
+    {name = "SADARAVENDOR_ID"; sqlType = NVARCHAR; length = 10;},
+    {name = "CREATIONDATETIME"; sqlType = TIMESTAMP;},
+    {name = "CREATEDBY"; sqlType = NVARCHAR; length = 100;},
+    {name = "UPDATEDATETIME"; sqlType = TIMESTAMP;},
+    {name = "UPDATEDBY"; sqlType = NVARCHAR; length = 100;},
+    {name = "DELETIONFLAG"; sqlType = NVARCHAR; length = 2; defaultValue = "";}
+ ];
+ 
+ table.primaryKey.pkcolumns = ["SERVICEPROVIDER_ID"];

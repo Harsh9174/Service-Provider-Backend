@@ -1,0 +1,23 @@
+service {
+  "BTP_CUSTOMAPPS"."SDR.ServiceProviders.Tables::SERVICE_PROVIDER_MASTER"
+    as "SERVICEPROVIDERMASTER";
+    
+  "BTP_CUSTOMAPPS"."SDR.ServiceProviders.Tables::SERVICE_PROVIDER_DETAILS"
+    as "SERVICEPROVIDERDETAILS";
+    
+  "BTP_CUSTOMAPPS"."SDR.ServiceProviders.Tables::SERVICES_MASTER"
+    as "SERVICESMASTER";
+    
+  "BTP_CUSTOMAPPS"."SDR.ServiceProviders.Tables::SERVICE_CATEGORY"
+    as "SERVICECATEGORY";
+
+  "_SYS_BIC"."SDR.ServiceProviders.Views/CV_PROVIDER_DETAILS"
+    as "CV_PROVIDER_DETAILS"
+    key("UUID");
+    
+  "_SYS_BIC"."SDR.ServiceProviders.Views/CV_SERVICES_MASTER"
+    as "CV_SERVICES_MASTER"
+    key("SERVICE_ID");
+    
+}
+
